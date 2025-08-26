@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Welcome - Poll System{% endblock %}
+{% block content %}
+<div class="text-center glass-card">
+    <h1 class="display-4">Welcome to PollSystem</h1>
+    <p class="lead">Your one-stop solution for creating and managing polls. Cast your vote and see the results in real-time.</p>
+    <hr class="my-4">
+    <p>Get started by logging in or viewing the active polls.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'poll_list' %}" role="button">View Active Polls</a>
+</div>
+{% endblock %}

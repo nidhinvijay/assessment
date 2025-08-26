@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Active Polls{% endblock %}
+{% block content %}
+<h1 class="mb-4 text-center">Active Polls</h1>
+{% for poll in polls %}
+<div class="glass-card mb-3">
+    <h5 class="card-title">{{ poll.title }}</h5>
+    <p class="card-text text-muted">{{ poll.description }}</p>
+    <a href="{% url 'poll_detail' poll.id %}" class="btn btn-primary">View Poll &rarr;</a>
+</div>
+{% empty %}
+<div class="glass-card text-center">
+    <p>There are no active polls at the moment.</p>
+</div>
+{% endfor %}
+{% endblock %}

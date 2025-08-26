@@ -25,8 +25,14 @@ SECRET_KEY = 'django-insecure-cyu=5$%y(=&vnlg9qx-i6bpfkxlxvkruh8ef&naqtj#s4g_!%#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+STATIC_URL = 'static/'
+
+# Add this at the end of the file
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Application definition
 
@@ -37,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'poll',  # Add the poll app here
 ]
 
 MIDDLEWARE = [
@@ -120,3 +127,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# mypollsite/settings.py (at the very end)
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
+
+
+# -- Authentication URLs --
+# Tell Django where to send users when they need to log in.
+LOGIN_URL = 'login'
+
+# Tell Django where to send users AFTER they successfully log in.
+LOGIN_REDIRECT_URL = 'poll_list'
+
+# Tell Django where to send users AFTER they log out.
+LOGOUT_REDIRECT_URL = 'index'

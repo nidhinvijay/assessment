@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}My Voting History{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <h1 class="text-center mb-4">My Voting History</h1>
+    
+    {% for vote in votes %}
+    <div class="p-3 mb-3" style="background: rgba(0,0,0,0.05); border-radius: 0.5rem;">
+        <p class="mb-1">
+            <strong>Poll:</strong> 
+            <a href="{% url 'poll_detail' vote.poll.id %}" class="text-decoration-none" style="color: var(--primary-color);">{{ vote.poll.title }}</a>
+        </p>
+        <p class="mb-2"><strong>Question:</strong> {{ vote.question.question_text }}</p>
+        <p class="mb-1">
+            <strong>Your choice:</strong> 
+            <span class="badge bg-success">{{ vote.choice.choice_text }}</span>
+        </p>
+        <div class="mt-2">
+             <a href="{% url 'poll_results' vote.poll.id %}" class="btn btn-sm btn-outline-info">View Full Poll Results</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="text-center p-4">
+        <p>You have not voted in any polls yet.</p>
+        <a href="{% url 'poll_list' %}" class="btn btn-primary">Find an Active Poll</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

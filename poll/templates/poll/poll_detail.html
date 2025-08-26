@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ poll.title }} - Details{% endblock %}
+
+{% block content %}
+<div class="glass-card text-center">
+    <h1 class="display-5">{{ poll.title }}</h1>
+    <p class="lead">{{ poll.description }}</p>
+    <hr class="my-4">
+
+    {% if user_has_voted %}
+    <div class="alert alert-success">
+        <h4 class="alert-heading">Vote Cast!</h4>
+        <p>You have already participated in this poll. You can view the current results below.</p>
+    </div>
+    <a href="{% url 'poll_results' poll.id %}" class="btn btn-info btn-lg">View Results</a>
+    
+    {% elif not poll.is_active %}
+    <div class="alert alert-warning">
+        <h4 class="alert-heading">Poll Closed</h4>
+        <p>This poll is no longer active and cannot be voted in.</p>
+    </div>
+    <a href="{% url 'poll_results' poll.id %}" class="btn btn-secondary btn-lg">View Final Results</a>
+
+    {% else %}
+    <div class="alert alert-light" style="background: none; border: none;">
+        <h4 class="alert-heading">Ready to make your voice heard?</h4>
+        <p>Click the button below to cast your vote. Remember, you can only vote once!</p>
+    </div>
+    <a href="{% url 'vote' poll.id %}" class="btn btn-success btn-lg">Vote Now</a>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'poll_list' %}" class="btn btn-outline-secondary">&larr; Back to All Polls</a>
+    </div>
+</div>
+{% endblock %}
